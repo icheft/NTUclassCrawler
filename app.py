@@ -79,8 +79,7 @@ def main(local=False):
             '選擇檢視欄位',
             list(valid_column),
             list(valid_column))
-
-    days = ['一', '二', '三', '四', '五', '六', '七']
+    days = ['一', '二', '三', '四', '五', '六', '日']
     # days_select = [False for i in range(7)]
 
     if 'days_select' not in st.session_state:
