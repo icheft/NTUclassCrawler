@@ -22,7 +22,7 @@ def parse_args():
     return parser.parse_args()
 
 
-@st.cache(hash_funcs={type(st.secrets): _hash_st_secrets})
+@st.cache(max_entries=20, ttl=3600, hash_funcs={type(st.secrets): _hash_st_secrets})
 def read_df(local=False):
     if local:
         try:
@@ -80,7 +80,7 @@ def main(local=False):
             list(valid_column),
             list(valid_column))
 
-    days = ['一', '二', '三', '四', '五', '六', '七']
+    days = ['一', '二', '三', '四', '五', '六', '日']
     # days_select = [False for i in range(7)]
 
     if 'days_select' not in st.session_state:
