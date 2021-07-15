@@ -22,7 +22,7 @@ def parse_args():
     return parser.parse_args()
 
 
-@st.cache(hash_funcs={type(st.secrets): _hash_st_secrets})
+@st.cache(max_entries=200, ttl=21600, hash_funcs={type(st.secrets): _hash_st_secrets})
 def read_df(local=False):
     if local:
         try:
@@ -79,6 +79,7 @@ def main(local=False):
             '選擇檢視欄位',
             list(valid_column),
             list(valid_column))
+
     days = ['一', '二', '三', '四', '五', '六', '日']
     # days_select = [False for i in range(7)]
 
@@ -129,7 +130,6 @@ def main(local=False):
             else:
                 return False
 
-    st.write("## 課表結果")
     with st.spinner("結果產生中⋯"):
         if search_txt == "" and np.sum(st.session_state['days_select']) == 0:
             display_df = df[view_options]
@@ -140,6 +140,8 @@ def main(local=False):
             else:
                 display_df = df[(df['Title'].str.contains(search_txt) | df['Instructor'].str.contains(
                     search_txt) | df['Id'].str.contains(search_txt)) & course_df['raw_day'].apply(in_list, args=(date_opt,))][view_options]
+    st.write(
+        f"<h2>課程搜尋結果 <span style='font-size: 12pt'>({int(display_df.shape[0])}筆結果)</span></h2>", unsafe_allow_html=True)
 
     st.write("""<style>
     tr:hover {background-color:#50536b42;
