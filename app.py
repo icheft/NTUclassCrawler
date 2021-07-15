@@ -22,7 +22,7 @@ def parse_args():
     return parser.parse_args()
 
 
-@st.cache(max_entries=20, ttl=21600, hash_funcs={type(st.secrets): _hash_st_secrets})
+@st.cache(max_entries=200, ttl=21600, hash_funcs={type(st.secrets): _hash_st_secrets})
 def read_df(local=False):
     if local:
         try:
