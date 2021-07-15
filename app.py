@@ -22,7 +22,7 @@ def parse_args():
     return parser.parse_args()
 
 
-@st.cache(max_entries=200, ttl=21600, hash_funcs={type(st.secrets): _hash_st_secrets})
+@st.cache(max_entries=10, ttl=3600, hash_funcs={type(st.secrets): _hash_st_secrets})
 def read_df(local=False):
     if local:
         try:
@@ -57,7 +57,7 @@ def main(local=False):
         layout="wide",
         initial_sidebar_state="expanded",
     )
-    with st.spinner('讀取資料中⋯'):
+    with st.spinner('讀取資料中⋯'):  # read data
         course_df = read_df(local)
         course_df = pre_processing(course_df.copy())
     st.write("""
@@ -85,9 +85,6 @@ def main(local=False):
 
     if 'days_select' not in st.session_state:
         st.session_state['days_select'] = [False for i in range(7)]
-
-    def update_day(d):
-        st.session_state['days_select'][d] = not st.session_state['days_select'][d]
 
     with st.form("date_picker"):
         st.write("選擇上課日")
@@ -156,11 +153,7 @@ def main(local=False):
 {display_df.to_html()}
 </div>""", unsafe_allow_html=True)
 
-    # <div class="styledTable" style="overflow:scroll">
-    # </div>
-
     st.balloons()
-    # pd.set_option('display.max_colwidth', 40)
 
 
 if __name__ == '__main__':
