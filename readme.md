@@ -140,7 +140,7 @@ python3 crawl.py -b % --save course.xlsx --semester 1101
 
 ### Local Wep App Deployment
 
-如果私服器（目前資料存放于台大資管系）有任何問題，或是你想在自己的電腦嘗試部署 [Web App](https://share.streamlit.io/icheft/ntuclasscrawler/app.py)，也可以利用以下作法在 local 端建置。
+如果伺服器（目前資料存放於台大資管系）有任何問題，或是你想在自己的電腦嘗試部署 [Web App](https://share.streamlit.io/icheft/ntuclasscrawler/app.py)，也可以利用以下作法在 local 端建置。
 
 If the server held in the Department of Information Management fails or you want to deploy this web app locally, here are some tips to get you started.
 
@@ -165,7 +165,7 @@ Responsive design as well 🙌🏾
 
 <div style='font-size: 10px;'>
 <p>
-* 註：此部分僅為 local 端佈建使用。<br>
+* 註：此部分僅為 local 端部署使用。<br>
 This part serves for people who want to deploy locally.
 </p>
 </div>
