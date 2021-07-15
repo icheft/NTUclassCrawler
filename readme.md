@@ -35,6 +35,8 @@ You can execute this program either in GUI or terminal. In addition, the website
 
 👉🏽 [傳送門](https://share.streamlit.io/icheft/ntuclasscrawler/app.py) · [Web App Link](https://share.streamlit.io/icheft/ntuclasscrawler/app.py)
 
+If the app crashes, please feel free to contact me (DM). I'll deal with it ASAP. 
+
 ## How to Use Locally
 ### Environment
 <a target="_blank" href="https://www.python.org/downloads/" title="Python version"><img src="https://img.shields.io/badge/python-%3E=_3.7-green.svg"></a> 
