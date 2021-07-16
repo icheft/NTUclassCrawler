@@ -61,25 +61,6 @@ def main(local=False):
         initial_sidebar_state="expanded",
     )
 
-    GA_JS = """<!-- Global site tag (gtag.js) - Google Analytics -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=UA-162829284-7"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'UA-162829284-7');
-</script>
-"""
-    # Insert the script in the head tag of the static template inside your virtual environement
-    index_path = pathlib.Path(st.__file__).parent / "static" / "index.html"
-    soup = BeautifulSoup(index_path.read_text(), features="lxml")
-    if not soup.find(id='custom-js'):
-        script_tag = soup.new_tag("script", id='custom-js')
-        script_tag.string = GA_JS
-        soup.head.append(script_tag)
-        index_path.write_text(str(soup))
-
     with st.spinner('讀取資料中⋯'):  # read data
         course_df = read_df(local)
         course_df = pre_processing(course_df.copy())
