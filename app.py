@@ -1,5 +1,6 @@
 import pandas as pd
 import streamlit as st
+import streamlit.components.v1 as components
 import numpy as np
 import re
 import argparse
@@ -57,6 +58,20 @@ def main(local=False):
         layout="wide",
         initial_sidebar_state="expanded",
     )
+
+    GA_JS = """<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-162829284-7"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-162829284-7');
+</script>
+"""
+
+    components.html(GA_JS, height=0)
+
     with st.spinner('讀取資料中⋯'):  # read data
         course_df = read_df(local)
         course_df = pre_processing(course_df.copy())
