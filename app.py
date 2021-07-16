@@ -5,6 +5,8 @@ import numpy as np
 import re
 import argparse
 import json
+import pathlib
+from bs4 import BeautifulSoup
 
 
 def _hash_st_secrets(secrets) -> int:
@@ -69,8 +71,14 @@ def main(local=False):
   gtag('config', 'UA-162829284-7');
 </script>
 """
-
-    components.html(GA_JS, height=0)
+    # Insert the script in the head tag of the static template inside your virtual environement
+    index_path = pathlib.Path(st.__file__).parent / "static" / "index.html"
+    soup = BeautifulSoup(index_path.read_text(), features="lxml")
+    if not soup.find(id='custom-js'):
+        script_tag = soup.new_tag("script", id='custom-js')
+        script_tag.string = GA_JS
+        soup.head.append(script_tag)
+        index_path.write_text(str(soup))
 
     with st.spinner('讀取資料中⋯'):  # read data
         course_df = read_df(local)
