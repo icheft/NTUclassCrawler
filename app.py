@@ -75,7 +75,7 @@ def main(local=False):
         need_help = st.beta_expander('需要幫忙嗎 👉')
         with need_help:
             st.markdown(
-                """輸入**課程名稱**或是**課程 ID** 或是**老師名稱**。不能夠同時輸入課程名稱和老師名稱。""", unsafe_allow_html=True)
+                """注意：您只能輸入**課程名稱**或是**課程 ID** 或是**老師名稱**。不能夠同時輸入課程名稱和老師名稱。""", unsafe_allow_html=True)
 
     with col2:
         valid_column = course_df.drop('raw_day', axis=1).columns
@@ -106,9 +106,11 @@ def main(local=False):
             days_select = st.session_state['days_select']
             pass
 
-    other_info = st.beta_expander('其他資訊 🔗')
-    with other_info:
-        st.markdown("""一些常用連結：
+    col3, col4 = st.beta_columns((6, 6))
+    with col3:
+        other_info = st.beta_expander('其他資訊 🔗')
+        with other_info:
+            st.markdown("""一些常用連結：
 
 + [PTT NTUcourse 看板](https://www.ptt.cc/bbs/NTUcourse/index.html)
 + [Original Repo](https://github.com/hungchun0201/NTUclassCrawler)
@@ -116,6 +118,14 @@ def main(local=False):
 
 <span style="font-size: 10px">* 註：僅為小型試用版，故僅用 Streamlit 簡單製作而已。若有不週全的地方，請自行修正 🙌🏾</span>
                     """, unsafe_allow_html=True)
+
+    with col4:
+        update_info = st.beta_expander('更新消息 👋🏾')
+        with update_info:
+            st.info(
+                """[UPDATE] (at **2021-07-18**)
+
+分頁表格 is now available at [React-Table Branch](https://share.streamlit.io/icheft/ntuclasscrawler/react-table/app.py)!""")
 
     df = course_df
 
