@@ -1,29 +1,12 @@
 import time
 import pandas as pd
 import streamlit as st
-import streamlit.components.v1 as components
+from st_material_table import st_material_table
 import numpy as np
 import re
 import argparse
 import json
 import os
-
-_RELEASE = True
-
-if not _RELEASE:
-    _custom_table = components.declare_component(
-        "custom_table",
-        url="http://localhost:3001",
-    )
-else:
-    parent_dir = os.path.dirname(os.path.abspath(__file__))
-    build_dir = os.path.join(parent_dir, "frontend/build")
-    _custom_table = components.declare_component(
-        "custom_table", path=build_dir)
-
-
-def custom_table(data, key=None):
-    return _custom_table(data=data, key=key, default=pd.DataFrame())
 
 
 def _hash_st_secrets(secrets) -> int:
@@ -174,7 +157,7 @@ def main(local=False):
 # {display_df.to_html()}
 # </div>""", unsafe_allow_html=True)
     with st.spinner(text='顯示資料中⋯'):
-        _ = custom_table(display_df)
+        _ = st_material_table(display_df)
 
     st.balloons()
 
